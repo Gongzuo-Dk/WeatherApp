@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if error %}
+    <div class="error-message">
+        <p>⚠️ {{ error }}</p>
+    </div>
+
+{% elif not weather %}
+    <div class="empty-state">
+        <p>⛅ Enter a city name to get started</p>
+    </div>
+
+{% else %}
+
+    <!-- Tab Buttons -->
+    <div class="tab-buttons">
+        <button class="tab-btn active" data-tab="today">Today</button>
+        <button class="tab-btn" data-tab="forecast">5-Day</button>
+    </div>
+
+    <!-- Today Tab -->
+    <div class="tab-content active" id="today">
+        <div class="weather-card">
+
+            <h2 class="city-name">
+                {{ weather.city }}, {{ weather.country }}
+                <span class="temperature">{{ weather.temperature }}°C</span>
+            </h2>
+
+            <img
+                class="weather-icon"
+                src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png"
+                alt="{{ weather.description }}"
+            >
+
+            <p class="description">{{ weather.description }}</p>
+
+            <div class="weather-details">
+                <span>💨 Wind: {{ weather.wind_speed }} m/s</span>
+                <span>💧 Humidity: {{ weather.humidity }}%</span>
+            </div>
+
+            <div class="sun-times">
+                <div class="sun-item">
+                    <span class="sun-icon">🌅</span>
+                    <span>Sunrise: {{ weather.sunrise|date:"H:i" }}</span>
+                </div>
+                <div class="sun-item">
+                    <span class="sun-icon">🌇</span>
+                    <span>Sunset: {{ weather.sunset|date:"H:i" }}</span>
+                </div>
+            </div>
+
+            <div class="extra-details">
+                <span>🌡️ Feels like: {{ weather.feels_like }}°C</span>
+                <span>📊 Pressure: {{ weather.pressure }} hPa</span>
+                <span>👁️ Visibility: {{ weather.visibility }} km</span>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 5-Day Tab -->
+    <div class="tab-content" id="forecast">
+        <div class="weather-card">
+
+            <h2 class="city-name">{{ weather.city }}, {{ weather.country }}</h2>
+
+            {% if forecast %}
+                <div class="forecast-list">
+                    {% for day in forecast %}
+                        <div class="forecast-row">
+                            <span class="forecast-date">
+                                {{ day.date|date:"l, d M" }}
+                            </span>
+                            <img
+                                src="https://openweathermap.org/img/wn/{{ day.icon }}.png"
+                                alt="{{ day.description }}"
+                            >
+                            <span class="forecast-temps">
+                                {{ day.temp_max }}°C / {{ day.temp_min }}°C
+                            </span>
+                            <span class="forecast-desc">
+                                {{ day.description }}
+                            </span>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+
+{% endif %}
+
+<!-- Tab switching JavaScript -->
+<script>
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+
+            // remove active from all buttons and contents
+            tabBtns.forEach(b => b.classList.remove('active'));
+            tabContents.forEach(c => c.classList.remove('active'));
+
+            // add active to clicked button and matching content
+            btn.classList.add('active');
+            document.getElementById(btn.dataset.tab).classList.add('active');
+        });
+    });
+</script>
+
+{% endblock %}

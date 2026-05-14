@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherApp</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-left">
+            <span class="navbar-logo">⛅</span>
+            <span class="navbar-title">WeatherApp</span>
+
+            {% if weather %}
+                <span class="navbar-current">
+                    {{ weather.city }}, {{ weather.country }}
+                    {{ weather.temperature }}°C
+                    <img src="https://openweathermap.org/img/wn/{{ weather.icon }}.png"
+                         alt="{{ weather.description }}">
+                </span>
+            {% endif %}
+        </div>
+
+        <div class="navbar-right">
+            <form method="GET" action="{% url 'weather-home' %}">
+                <input
+                    type="text"
+                    name="city"
+                    placeholder="Search city..."
+                    value="{{ city }}"
+                    autocomplete="off"
+                >
+                <button type="submit">🔍</button>
+            </form>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>

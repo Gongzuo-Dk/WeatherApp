@@ -1,5 +1,6 @@
 import requests
 from django.conf import settings
+from datetime import datetime, timezone
 
 def get_coordinates(city):
     # Convert a city name to lat/lon coordinates using OpenWeather Geocoding API.
@@ -65,8 +66,8 @@ def get_current_weather(city):
             "description": data["weather"][0]["description"].capitalize(),
             "icon": data["weather"][0]["icon"],
             "wind_speed": data["wind"]["speed"],
-            "sunrise": data["sys"]["sunrise"],
-            "sunset": data["sys"]["sunset"],
+            "sunrise": datetime.fromtimestamp(data["sys"]["sunrise"], tz=timezone.utc),
+            "sunset": datetime.fromtimestamp(data["sys"]["sunset"], tz=timezone.utc),
         }
     
     except requests.exceptions.RequestException:

@@ -47,7 +47,7 @@ ROOT_URLCONF = 'WeatherApp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -111,3 +111,7 @@ STATIC_URL = 'static/'
 
 # API KEY
 OPENWEATHER_API_KEY = config('OPENWEATHER_API_KEY')
+
+# Static files
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
