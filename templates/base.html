@@ -11,8 +11,10 @@
 
     <nav class="navbar">
         <div class="navbar-left">
-            <span class="navbar-logo">⛅</span>
-            <span class="navbar-title">WeatherApp</span>
+            <a href="{% url 'weather-home' %}" class="navbar-brand">
+                <span class="navbar-logo">⛅</span>
+                <span class="navbar-title">WeatherApp</span>
+            </a>
 
             {% if weather %}
                 <span class="navbar-current">
@@ -32,6 +34,8 @@
                     placeholder="Search city..."
                     value="{{ city }}"
                     autocomplete="off"
+                    maxlength="50"
+                    minlength="2"
                 >
                 <button type="submit">🔍</button>
             </form>

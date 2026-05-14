@@ -8,13 +8,14 @@ def index(request):
     city = request.GET.get("city", "").strip()
 
     if city:
-        weather_data = get_current_weather(city)
-
-        if weather_data is None:
-            error = f"Could not find weather data for '{city}'. Please check the city name."
+        if len(city) < 2:
+            error = "Please enter at least 2 characters."
         else:
-            forecast_data = get_forecast(city)
-
+            weather_data = get_current_weather(city)
+            if weather_data is None:
+                error = f"Could not find weather data for '{city}'. Please check the city name."
+            else:
+                forecast_data = get_forecast(city)
     context = {
         'weather': weather_data,
         'forecast': forecast_data,
