@@ -7,7 +7,7 @@ A weather web application built with Django that consumes the OpenWeatherMap API
 ![API](https://img.shields.io/badge/OpenWeatherMap-API-orange)
 
 ## Live Demo
-🔗 *Coming soon*
+🔗 https://weatherapp-production-cc78.up.railway.app/
 
 ## About
 
@@ -105,10 +105,11 @@ Visit `http://127.0.0.1:8000` in your browser.
 
 ## Screenshots
 
-> *Sceenshots*
+> <img width="1274" height="913" alt="Screenshot 2026-05-14 161457" src="https://github.com/user-attachments/assets/44dd14e6-8bb3-496e-b9ed-8f2488b690f1" />
+> <img width="1272" height="912" alt="Screenshot 2026-05-14 161512" src="https://github.com/user-attachments/assets/fdae2ff0-44b1-439d-9aac-dd088a5dd894" />
 
 ## Author
 
 Daniel K
-GitHub: https://github.com/Gongzuo-Dk
+GitHub: https://github.com/Gongzuo-Dk  
 LinkedIn: https://www.linkedin.com/in/danylo-kulynych/
