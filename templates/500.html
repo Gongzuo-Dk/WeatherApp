@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h2>500 — Server Error</h2>
+<p>Something went wrong on our end. Please try again later.</p>
+<a href="{% url 'weather-home' %}">Go back home</a>
+{% endblock %}
